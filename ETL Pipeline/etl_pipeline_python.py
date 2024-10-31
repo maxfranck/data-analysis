@@ -75,16 +75,22 @@ def load(df, tbl):
         # Configura a string de conexão para o PostgreSQL
         engine = create_engine(f'postgresql://{b_uid}:{b_pwd}@{b_server}:5432/{b_database}')
 
+        # Cria a conexão com o banco de dados PostgreSQL
+        conn = engine.connect()
+
         # Imprime o status da importação de dados
         print(f'importing rows {rows_imported} to {rows_imported + len(df)}... for table {tbl}')
 
         # Insere os dados no banco B, criando ou substituindo a tabela de estágio correspondente
-        df.to_sql(f'stg_{tbl}', engine, if_exists='replace', index=False, chunksize=100000)
+        df.to_sql(f'stg_{tbl}', conn, if_exists='replace', index=False, chunksize=100000)
 
         # Atualiza a contagem de linhas importadas
         rows_imported += len(df)
 
         print("Data imported successfully")
+
+        # Fecha a conexão com o banco B após a carga
+        conn.close()
 
     except Exception as e:
         print("Data load error: " + str(e))
