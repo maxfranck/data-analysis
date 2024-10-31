@@ -1,0 +1,23 @@
+# Ignorar o arquivo .env
+.env
+
+# Ignorar outras variáveis de ambiente (caso tenha arquivos com sufixo como .env.local ou .env.production)
+# .env.*
+
+# Ignorar pastas de dependências
+node_modules/
+vendor/
+
+# Ignorar pastas de build e arquivos temporários
+dist/
+build/
+tmp/
+*.log
+
+# Ignorar configurações de IDEs comuns
+.vscode/
+.idea/
+.DS_Store
+
+# Ignorar arquivos do sistema
+Thumbs.db
