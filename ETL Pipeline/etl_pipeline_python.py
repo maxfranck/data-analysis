@@ -21,12 +21,19 @@ try:
     src_engine = create_engine(connection_url)
     src_conn = src_engine.connect()
     print("Conexão bem-sucedida!")
-  
-    query = "SELECT TOP 10 * FROM TABLE_NAME"
-    
-    df = pd.read_sql(query, src_conn)
-    
-    print(df)
+
+    query = """
+        select  t.name as table_name
+        from sys.tables t
+        where t.name in ('TB_LOTE_LOCALIZACAO','TB_LOC_QUADRA')
+    """
+    src_tables = pd.read_sql_query(query, src_conn).to_dict()['table_name']
+
+    for id in src_tables:
+        table_name = src_tables[id]
+        df = pd.read_sql_query(f'select top 5 * FROM {table_name}', src_conn)
+        print(df)
+        # load(df, table_name)
 
     src_conn.close()
 

@@ -1,0 +1,21 @@
+# EditorConfig is awesome: https://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+# Definição padrão para todos os arquivos
+[*]
+charset = utf-8          # Codificação de caractere UTF-8
+end_of_line = lf         # Quebra de linha estilo Unix
+insert_final_newline = true  # Adiciona nova linha ao final do arquivo
+trim_trailing_whitespace = true # Remove espaços em branco ao final das linhas
+
+# Configurações para arquivos Python
+[*.py]
+indent_style = space         # Define o estilo de indentação para espaço
+indent_size = 4              # Define o tamanho de indentação para 4 espaços (PEP 8)
+max_line_length = 79         # Define o tamanho máximo de linha para 79 caracteres, conforme PEP 8
+
+# Configuração para arquivos de texto, Markdown e YAML
+[*.md, *.yml, *.yaml, *.txt]
+trim_trailing_whitespace = false   # Não remove espaços ao final, necessário para alguns arquivos Markdown
